@@ -19,7 +19,7 @@
 
 <sc-if value="{{ showLoader }}" hint-placeholder-val="{{ true }}">
 <div style="position:fixed; inset:0; z-index:100; background:#fbf4e6; display:flex; align-items:center; justify-content:center; overflow:hidden; opacity:{{ k.lo }}; transition:opacity .9s ease;">
-  <div style="position:absolute; inset:0; z-index:3; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:28px; padding:24px; text-align:center; opacity:{{ k.intro }}; transition:opacity .6s ease; pointer-events:{{ k.introPe }};">
+  <div style="position:absolute; inset:0; z-index:3; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:28px; padding:24px; text-align:center; opacity:{{ k.intro }}; transition:opacity .45s ease; pointer-events:{{ k.introPe }};">
     <div style="position:relative; width:120px; height:110px;">
       <div style="position:absolute; left:50%; top:0; width:120px; height:120px; transform:translateX(-50%); background:radial-gradient(circle, rgba(255,196,90,.55) 0%, rgba(255,196,90,0) 65%);"></div>
       <div style="position:absolute; left:50%; top:22px; width:22px; height:38px; transform-origin:50% 100%; border-radius:50% 50% 50% 50% / 62% 62% 38% 38%; background:radial-gradient(ellipse at 50% 70%, #fff7d0 0%, #ffc63d 45%, #f0731a 100%); animation:flicker 1.4s ease-in-out infinite;"></div>
@@ -35,27 +35,48 @@
   </div>
 
   <div style="position:absolute; inset:0; opacity:{{ k.brown }}; transition:opacity .9s ease; background:radial-gradient(circle at 50% 50%, #f3c97a 0%, #f7deb0 35%, #fbf4e6 75%);"></div>
-  <div style="position:relative; pointer-events:none; width:min(70vw,340px); aspect-ratio:1; opacity:{{ k.kv }}; transition:opacity .7s ease;">
-    <svg viewBox="-120 -120 240 240" style="width:100%; height:100%; overflow:visible;" fill="none" stroke="#c9a050" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-      <g fill="#c9a050" stroke="none">
-        <circle cx="0" cy="-100" r="3.5" style="opacity:{{ k.dot }}; transition:opacity .3s ease 0s;"></circle>
-        <circle cx="100" cy="0" r="3.5" style="opacity:{{ k.dot }}; transition:opacity .25s ease .04s;"></circle>
-        <circle cx="0" cy="100" r="3.5" style="opacity:{{ k.dot }}; transition:opacity .25s ease .08s;"></circle>
-        <circle cx="-100" cy="0" r="3.5" style="opacity:{{ k.dot }}; transition:opacity .25s ease .12s;"></circle>
-        <circle cx="0" cy="0" r="3.5" style="opacity:{{ k.dot }}; transition:opacity .25s ease .16s;"></circle>
-        <circle cx="-62" cy="-62" r="3" style="opacity:{{ k.dot }}; transition:opacity .25s ease .2s;"></circle>
-        <circle cx="62" cy="-62" r="3" style="opacity:{{ k.dot }}; transition:opacity .25s ease .22s;"></circle>
-        <circle cx="62" cy="62" r="3" style="opacity:{{ k.dot }}; transition:opacity .25s ease .24s;"></circle>
-        <circle cx="-62" cy="62" r="3" style="opacity:{{ k.dot }}; transition:opacity .25s ease .26s;"></circle>
-      </g>
-      <path d="M0,-100 L0,100" pathLength="1" stroke-dasharray="1" style="stroke-dashoffset:{{ k.off }}; transition:stroke-dashoffset .35s ease .3s;"></path>
-      <path d="M-100,0 L100,0" pathLength="1" stroke-dasharray="1" style="stroke-dashoffset:{{ k.off }}; transition:stroke-dashoffset .35s ease .45s;"></path>
-      <path d="M0,-100 L100,0 L0,100 L-100,0 Z" pathLength="1" stroke-dasharray="1" style="stroke-dashoffset:{{ k.off }}; transition:stroke-dashoffset .6s ease-in-out .65s;"></path>
-      <path d="M0,-22 Q20,-61 0,-100 Q-20,-61 0,-22" pathLength="1" stroke-dasharray="1" style="stroke-dashoffset:{{ k.off }}; transition:stroke-dashoffset .35s ease 1.15s;"></path>
-      <path d="M22,0 Q61,20 100,0 Q61,-20 22,0" pathLength="1" stroke-dasharray="1" style="stroke-dashoffset:{{ k.off }}; transition:stroke-dashoffset .35s ease 1.3s;"></path>
-      <path d="M0,22 Q-20,61 0,100 Q20,61 0,22" pathLength="1" stroke-dasharray="1" style="stroke-dashoffset:{{ k.off }}; transition:stroke-dashoffset .35s ease 1.45s;"></path>
-      <path d="M-22,0 Q-61,-20 -100,0 Q-61,20 -22,0" pathLength="1" stroke-dasharray="1" style="stroke-dashoffset:{{ k.off }}; transition:stroke-dashoffset .35s ease 1.6s;"></path>
-      <circle cx="0" cy="0" r="22" pathLength="1" stroke-dasharray="1" style="stroke-dashoffset:{{ k.off }}; transition:stroke-dashoffset .45s ease 1.85s;"></circle>
+  <div style="position:relative; pointer-events:none; width:min(72vw,340px); aspect-ratio:1; opacity:{{ k.kv }}; transform:scale({{ k.ks }}); filter:{{ k.glow }}; transition:opacity .5s ease, transform 1.4s cubic-bezier(.2,.7,.2,1), filter .9s ease;">
+    <svg viewBox="-120 -120 240 240" style="width:100%; height:100%; overflow:visible;" fill="none" stroke="#b8862f" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M0,0 C13,-12 13,-28 0,-40 C-13,-28 -13,-12 0,0" pathLength="1" stroke-dasharray="1" style="opacity:0; stroke-dashoffset:1; animation:{{ k.drawA }} 0.42s ease-in-out 1.25s both;"></path>
+      <path d="M0,0 C12,13 28,13 40,0 C28,-13 12,-13 0,0" pathLength="1" stroke-dasharray="1" style="opacity:0; stroke-dashoffset:1; animation:{{ k.drawA }} 0.42s ease-in-out 1.35s both;"></path>
+      <path d="M0,0 C-13,12 -13,28 0,40 C13,28 13,12 0,0" pathLength="1" stroke-dasharray="1" style="opacity:0; stroke-dashoffset:1; animation:{{ k.drawA }} 0.42s ease-in-out 1.45s both;"></path>
+      <path d="M0,0 C-12,-13 -28,-13 -40,0 C-28,13 -12,13 0,0" pathLength="1" stroke-dasharray="1" style="opacity:0; stroke-dashoffset:1; animation:{{ k.drawA }} 0.42s ease-in-out 1.55s both;"></path>
+      <path d="M0,-40 A40,40 0 1 1 0,40 A40,40 0 1 1 0,-40" pathLength="1" stroke-dasharray="1" style="opacity:0; stroke-dashoffset:1; animation:{{ k.drawA }} 0.6s ease-in-out 1.75s both;"></path>
+      <path d="M0,-40 C11,-50 11,-70 0,-80 C-11,-70 -11,-50 0,-40" pathLength="1" stroke-dasharray="1" style="opacity:0; stroke-dashoffset:1; animation:{{ k.drawA }} 0.42s ease-in-out 2.0s both;"></path>
+      <path d="M40,0 C50,11 70,11 80,0 C70,-11 50,-11 40,0" pathLength="1" stroke-dasharray="1" style="opacity:0; stroke-dashoffset:1; animation:{{ k.drawA }} 0.42s ease-in-out 2.1s both;"></path>
+      <path d="M0,40 C-11,50 -11,70 0,80 C11,70 11,50 0,40" pathLength="1" stroke-dasharray="1" style="opacity:0; stroke-dashoffset:1; animation:{{ k.drawA }} 0.42s ease-in-out 2.2s both;"></path>
+      <path d="M-40,0 C-50,-11 -70,-11 -80,0 C-70,11 -50,11 -40,0" pathLength="1" stroke-dasharray="1" style="opacity:0; stroke-dashoffset:1; animation:{{ k.drawA }} 0.42s ease-in-out 2.3s both;"></path>
+      <path d="M0,-80 Q31.3,-71.3 40,-40 Q71.3,-31.3 80,0 Q71.3,31.3 40,40 Q31.3,71.3 0,80 Q-31.3,71.3 -40,40 Q-71.3,31.3 -80,0 Q-71.3,-31.3 -40,-40 Q-31.3,-71.3 0,-80" pathLength="1" stroke-dasharray="1" style="opacity:0; stroke-dashoffset:1; animation:{{ k.drawA }} 0.95s linear 2.6s both;"></path>
+      <path d="M0,-80 C14,-92 10,-108 0,-108 C-10,-108 -14,-92 0,-80" pathLength="1" stroke-dasharray="1" style="opacity:0; stroke-dashoffset:1; animation:{{ k.drawA }} 0.38s ease-in-out 3.45s both;"></path>
+      <path d="M80,0 C92,14 108,10 108,0 C108,-10 92,-14 80,0" pathLength="1" stroke-dasharray="1" style="opacity:0; stroke-dashoffset:1; animation:{{ k.drawA }} 0.38s ease-in-out 3.5s both;"></path>
+      <path d="M0,80 C-14,92 -10,108 0,108 C10,108 14,92 0,80" pathLength="1" stroke-dasharray="1" style="opacity:0; stroke-dashoffset:1; animation:{{ k.drawA }} 0.38s ease-in-out 3.55s both;"></path>
+      <path d="M-80,0 C-92,-14 -108,-10 -108,0 C-108,10 -92,14 -80,0" pathLength="1" stroke-dasharray="1" style="opacity:0; stroke-dashoffset:1; animation:{{ k.drawA }} 0.38s ease-in-out 3.6s both;"></path>
+      <circle cx="0" cy="0" r="4" stroke="#c9a050" stroke-width="1.4" style="opacity:0; transform-box:fill-box; transform-origin:center; animation:{{ k.pingA }} .7s ease-out 1.25s both;"></circle>
+      <circle cx="0" cy="-40" r="4" stroke="#c9a050" stroke-width="1.4" style="opacity:0; transform-box:fill-box; transform-origin:center; animation:{{ k.pingA }} .7s ease-out 1.46s both;"></circle>
+      <circle cx="40" cy="0" r="4" stroke="#c9a050" stroke-width="1.4" style="opacity:0; transform-box:fill-box; transform-origin:center; animation:{{ k.pingA }} .7s ease-out 1.56s both;"></circle>
+      <circle cx="0" cy="40" r="4" stroke="#c9a050" stroke-width="1.4" style="opacity:0; transform-box:fill-box; transform-origin:center; animation:{{ k.pingA }} .7s ease-out 1.66s both;"></circle>
+      <circle cx="-40" cy="0" r="4" stroke="#c9a050" stroke-width="1.4" style="opacity:0; transform-box:fill-box; transform-origin:center; animation:{{ k.pingA }} .7s ease-out 1.76s both;"></circle>
+      <circle cx="40" cy="-40" r="4" stroke="#c9a050" stroke-width="1.4" style="opacity:0; transform-box:fill-box; transform-origin:center; animation:{{ k.pingA }} .7s ease-out 2.72s both;"></circle>
+      <circle cx="40" cy="40" r="4" stroke="#c9a050" stroke-width="1.4" style="opacity:0; transform-box:fill-box; transform-origin:center; animation:{{ k.pingA }} .7s ease-out 2.96s both;"></circle>
+      <circle cx="-40" cy="40" r="4" stroke="#c9a050" stroke-width="1.4" style="opacity:0; transform-box:fill-box; transform-origin:center; animation:{{ k.pingA }} .7s ease-out 3.19s both;"></circle>
+      <circle cx="-40" cy="-40" r="4" stroke="#c9a050" stroke-width="1.4" style="opacity:0; transform-box:fill-box; transform-origin:center; animation:{{ k.pingA }} .7s ease-out 3.43s both;"></circle>
+      <circle cx="0" cy="-80" r="4" stroke="#c9a050" stroke-width="1.4" style="opacity:0; transform-box:fill-box; transform-origin:center; animation:{{ k.pingA }} .7s ease-out 2.21s both;"></circle>
+      <circle cx="80" cy="0" r="4" stroke="#c9a050" stroke-width="1.4" style="opacity:0; transform-box:fill-box; transform-origin:center; animation:{{ k.pingA }} .7s ease-out 2.31s both;"></circle>
+      <circle cx="0" cy="80" r="4" stroke="#c9a050" stroke-width="1.4" style="opacity:0; transform-box:fill-box; transform-origin:center; animation:{{ k.pingA }} .7s ease-out 2.41s both;"></circle>
+      <circle cx="-80" cy="0" r="4" stroke="#c9a050" stroke-width="1.4" style="opacity:0; transform-box:fill-box; transform-origin:center; animation:{{ k.pingA }} .7s ease-out 2.51s both;"></circle>
+      <circle cx="0" cy="0" r="3.8" fill="#8e1f26" stroke="none" style="opacity:0; transform-box:fill-box; transform-origin:center; animation:{{ k.dotA }} .4s ease-out 0.40s both;"></circle>
+      <circle cx="0" cy="-40" r="3.8" fill="#8e1f26" stroke="none" style="opacity:0; transform-box:fill-box; transform-origin:center; animation:{{ k.dotA }} .4s ease-out 0.45s both;"></circle>
+      <circle cx="40" cy="0" r="3.8" fill="#8e1f26" stroke="none" style="opacity:0; transform-box:fill-box; transform-origin:center; animation:{{ k.dotA }} .4s ease-out 0.50s both;"></circle>
+      <circle cx="0" cy="40" r="3.8" fill="#8e1f26" stroke="none" style="opacity:0; transform-box:fill-box; transform-origin:center; animation:{{ k.dotA }} .4s ease-out 0.55s both;"></circle>
+      <circle cx="-40" cy="0" r="3.8" fill="#8e1f26" stroke="none" style="opacity:0; transform-box:fill-box; transform-origin:center; animation:{{ k.dotA }} .4s ease-out 0.60s both;"></circle>
+      <circle cx="40" cy="-40" r="3.8" fill="#8e1f26" stroke="none" style="opacity:0; transform-box:fill-box; transform-origin:center; animation:{{ k.dotA }} .4s ease-out 0.65s both;"></circle>
+      <circle cx="40" cy="40" r="3.8" fill="#8e1f26" stroke="none" style="opacity:0; transform-box:fill-box; transform-origin:center; animation:{{ k.dotA }} .4s ease-out 0.70s both;"></circle>
+      <circle cx="-40" cy="40" r="3.8" fill="#8e1f26" stroke="none" style="opacity:0; transform-box:fill-box; transform-origin:center; animation:{{ k.dotA }} .4s ease-out 0.75s both;"></circle>
+      <circle cx="-40" cy="-40" r="3.8" fill="#8e1f26" stroke="none" style="opacity:0; transform-box:fill-box; transform-origin:center; animation:{{ k.dotA }} .4s ease-out 0.80s both;"></circle>
+      <circle cx="0" cy="-80" r="3.8" fill="#8e1f26" stroke="none" style="opacity:0; transform-box:fill-box; transform-origin:center; animation:{{ k.dotA }} .4s ease-out 0.85s both;"></circle>
+      <circle cx="80" cy="0" r="3.8" fill="#8e1f26" stroke="none" style="opacity:0; transform-box:fill-box; transform-origin:center; animation:{{ k.dotA }} .4s ease-out 0.90s both;"></circle>
+      <circle cx="0" cy="80" r="3.8" fill="#8e1f26" stroke="none" style="opacity:0; transform-box:fill-box; transform-origin:center; animation:{{ k.dotA }} .4s ease-out 0.95s both;"></circle>
+      <circle cx="-80" cy="0" r="3.8" fill="#8e1f26" stroke="none" style="opacity:0; transform-box:fill-box; transform-origin:center; animation:{{ k.dotA }} .4s ease-out 1.00s both;"></circle>
     </svg>
   </div>
 </div>
@@ -468,8 +489,8 @@ class Component extends DCLogic {
       venueMapEmbedUrl:VENUE_MAP_EMBED_URL, venueMapUrl:VENUE_MAP_URL,
       petalDisplay:this.props.petals===false?'none':'block', stars:STARS, tor, heroPad:tor.pad, tr:vw<640?{cd:'none',nameDir:'column',cx:'-38px',cb:'25%',cs:.5,cs2:.47,bx:'-2vw',bb:'25%',bs:.72}:{cd:'block',nameDir:'row',cx:'-6px',cb:'22%',cs:.78,cs2:.74,bx:'calc(50% - min(44vw,330px))',bb:'22%',bs:1},
       showLoader:ph!=='done', heroHintO:ph==='done'&&!this.state.heroHintGone?1:0,
-      k:{lo:ph==='fade'?0:1,intro:on?0:1,introPe:on?'none':'auto',kv:ph==='kolam'?1:0,dot:on?1:0,off:on?0:1,sc:sw?7:1,brown:sw?1:0},
-      open:()=>{ if(this.state.phase!=='intro')return; this.playMusic(); this.setState({phase:'kolam'}); setTimeout(()=>this.setState({phase:'swell'}),2600); setTimeout(()=>this.setState({phase:'fade'}),3300); setTimeout(()=>{window.scrollTo(0,0);document.body.style.overflow='';this.setState({phase:'done'});},4300); },
+      k:{lo:ph==='fade'?0:1,intro:on?0:1,introPe:on?'none':'auto',kv:on?1:0,dotA:on?'kolamDot':'none',drawA:on?'kolamDraw':'none',pingA:on?'kolamPing':'none',ks:ph==='fade'?1.15:(sw?1.05:1),glow:sw?'drop-shadow(0 0 6px rgba(201,160,80,.7))':'drop-shadow(0 0 0 rgba(201,160,80,0))',brown:sw?1:0},
+      open:()=>{ if(this.state.phase!=='intro')return; this.playMusic(); this.setState({phase:'kolam'}); setTimeout(()=>this.setState({phase:'swell'}),4000); setTimeout(()=>this.setState({phase:'fade'}),4600); setTimeout(()=>{window.scrollTo(0,0);document.body.style.overflow='';this.setState({phase:'done'});},5500); },
       toggleMusic:()=>this.state.playing?this.pauseMusic():this.playMusic(), muteSlash:this.state.playing?0:1,
       toastMsg:this.state.toast||'', toastO:this.state.toast?1:0, toastY:this.state.toast?'0':'16px',
       rv, cd:{d:p(Math.floor(diff/864e5)),h:p(Math.floor(diff/36e5)%24),m:p(Math.floor(diff/6e4)%60),s:p(Math.floor(diff/1e3)%60)},
