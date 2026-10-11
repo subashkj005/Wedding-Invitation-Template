@@ -49,8 +49,8 @@ window.WEDDING_CONTENT = {
     addCalendarLabel: 'Add all events to Calendar',
     copyLinkLabel: 'Copy invitation link',
 
-    footerTamil: 'வாழ்க வளமுடன்',
-    footerMalayalam: 'മംഗളം ഭവന്തു',
+    footerTamil: '',
+    footer: 'Your gracious presence and blessings will make our special day even more memorable.',
     withLove: 'WITH LOVE'
   },
 

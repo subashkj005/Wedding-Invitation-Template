@@ -141,10 +141,11 @@
   <div style="position:relative; z-index:1; flex:1 1 0; min-height:0; width:100%; display:flex; align-items:flex-end; justify-content:center; padding:2vh 16px 0; box-sizing:border-box;">
     <img src="{{ images.gopuram }}" alt="" style="display:block; max-height:100%; max-width:min(86vw,560px); height:auto; width:auto; object-fit:contain; -webkit-mask-image:linear-gradient(180deg,#000 75%,transparent 100%); mask-image:linear-gradient(180deg,#000 75%,transparent 100%);">
   </div>
-  <div style="position:relative; z-index:1; flex:0 0 auto; padding:1vh 16px 5vh; display:flex; flex-direction:column; align-items:center; text-align:center; gap:2px;">
+  <div style="position:relative; z-index:1; flex:0 0 auto; padding:1vh 16px max(14px,3vh); display:flex; flex-direction:column; align-items:center; text-align:center; gap:2px;">
     <div style="font-family:'Cormorant Garamond',serif; font-weight:600; font-size:clamp(36px,min(13vw,9vh),108px); line-height:.95; color:#6e1620;">{{ couple.groomFirst }}</div>
     <div style="font-family:Cinzel,serif; font-size:14px; letter-spacing:.4em; color:#94691f; padding:min(6px,.8vh) 0 min(6px,.8vh) .4em;">{{ texts.weds }}</div>
     <div style="font-family:'Cormorant Garamond',serif; font-weight:600; font-size:clamp(36px,min(13vw,9vh),108px); line-height:.95; color:#6e1620;">{{ couple.brideFirst }}</div>
+    <div style="margin-top:min(20px,2.6vh); display:flex; flex-direction:column; align-items:center; gap:2px; font-family:Cinzel,serif; font-size:12px; letter-spacing:.3em; padding-left:.3em; color:#94691f; pointer-events:none; opacity:{{ heroHintO }}; transition:opacity .6s ease;">{{ texts.scrollPrompt }}<span style="font-size:18px; letter-spacing:0; line-height:1; animation:scrollHint 1.8s ease-in-out infinite;">↓</span></div>
   </div>
 </section>
 
@@ -318,7 +319,7 @@
 
 <footer data-screen-label="Footer" data-reveal="ft" style="max-width:760px; margin:0 auto; padding:32px 22px 96px; display:flex; flex-direction:column; align-items:center; gap:14px; text-align:center; opacity:{{ rv.ft.o }}; transform:{{ rv.ft.t }}; transition:all .9s ease;">
   <div style="font-family:'Noto Serif Tamil',serif; font-size:20px; color:#6e1620;">{{ texts.footerTamil }}</div>
-  <div style="font-family:'Noto Serif Malayalam',serif; font-size:19px; color:#6e1620;">{{ texts.footerMalayalam }}</div>
+  <div style="max-width:420px; font-family:'Cormorant Garamond',serif; font-style:italic; font-weight:500; font-size:19px; line-height:1.6; color:#5a1c22;">{{ texts.footer }}</div>
   <div style="width:120px; height:1px; background:linear-gradient(90deg,transparent,#c9a050,transparent); margin:8px 0;"></div>
   <div style="font-family:'Cormorant Garamond',serif; font-weight:600; font-size:clamp(40px,9vw,60px); line-height:1; color:#6e1620;">{{ couple.groomFirst }} &amp; {{ couple.brideFirst }}</div>
   <div style="font-family:Cinzel,serif; font-size:12px; letter-spacing:.3em; color:#8a6418; margin-top:6px;">{{ texts.withLove }} · {{ couple.families }}</div>
@@ -376,7 +377,7 @@ function buildToran(W,H){
  return{leaves,mari:mar,pendants:pend,h:(maxB+30)+'px',pad:(centerB+16)+'px'};}
 
 class Component extends DCLogic {
-  state={phase:'intro',playing:false,now:Date.now(),toast:null,seen:{},tlW:360,revealY:-1,scratched:false,burstFade:false};
+  state={phase:'intro',playing:false,now:Date.now(),toast:null,seen:{},tlW:360,revealY:-1,scratched:false,burstFade:false,heroHintGone:false};
   petalRef=React.createRef(); scratchRef=React.createRef(); burstRef=React.createRef(); tlRef=React.createRef();
   componentDidMount(){
     if('scrollRestoration' in history) history.scrollRestoration='manual';
@@ -389,7 +390,7 @@ class Component extends DCLogic {
     this.startPetals();
     this.onVis=()=>{ if(document.hidden){ if(this.state.playing){this.wasPlaying=true;this.pauseMusic();} } else if(this.wasPlaying){this.wasPlaying=false;this.playMusic();} };
     document.addEventListener('visibilitychange',this.onVis);
-    this.onScroll=()=>{ if(this.raf) return; this.raf=requestAnimationFrame(()=>{this.raf=null;this.measure();}); };
+    this.onScroll=()=>{ if(!this.state.heroHintGone&&this.state.phase==='done'&&window.scrollY>10) this.setState({heroHintGone:true}); if(this.raf) return; this.raf=requestAnimationFrame(()=>{this.raf=null;this.measure();}); };
     window.addEventListener('scroll',this.onScroll,{passive:true}); window.addEventListener('resize',this.onScroll); this.onRs=()=>this.setState({vw:document.documentElement.clientWidth,vh:innerHeight}); window.addEventListener('resize',this.onRs);
     this.io=new IntersectionObserver(es=>{const add={};es.forEach(e=>{if(e.isIntersecting){add[e.target.dataset.reveal]=true;this.io.unobserve(e.target);}});if(Object.keys(add).length)this.setState(s=>({seen:{...s.seen,...add}}));},{threshold:0.15});
     const late=()=>{this.observeAll();this.initScratch();this.measure();};
@@ -469,7 +470,7 @@ class Component extends DCLogic {
       couple:CONTENT.couple, texts:CONTENT.texts, images:CONTENT.images, venue:CONTENT.venue, wd:CONTENT.weddingDate,
       venueMapEmbedUrl:VENUE_MAP_EMBED_URL, venueMapUrl:VENUE_MAP_URL,
       petalDisplay:this.props.petals===false?'none':'block', stars:STARS, tor, heroPad:tor.pad, tr:vw<640?{cd:'none',nameDir:'column',cx:'-38px',cb:'25%',cs:.5,cs2:.47,bx:'-2vw',bb:'25%',bs:.72}:{cd:'block',nameDir:'row',cx:'-6px',cb:'22%',cs:.78,cs2:.74,bx:'calc(50% - min(44vw,330px))',bb:'22%',bs:1},
-      showLoader:ph!=='done',
+      showLoader:ph!=='done', heroHintO:ph==='done'&&!this.state.heroHintGone?1:0,
       k:{lo:ph==='fade'?0:1,intro:on?0:1,introPe:on?'none':'auto',kv:ph==='kolam'?1:0,dot:on?1:0,off:on?0:1,sc:sw?7:1,brown:sw?1:0},
       open:()=>{ if(this.state.phase!=='intro')return; this.playMusic(); this.setState({phase:'kolam'}); setTimeout(()=>this.setState({phase:'swell'}),2600); setTimeout(()=>this.setState({phase:'fade'}),3300); setTimeout(()=>{window.scrollTo(0,0);document.body.style.overflow='';this.setState({phase:'done'});},4300); },
       toggleMusic:()=>this.state.playing?this.pauseMusic():this.playMusic(), muteSlash:this.state.playing?0:1,
@@ -486,3 +487,4 @@ class Component extends DCLogic {
 </body>
 </html>
 
+z
