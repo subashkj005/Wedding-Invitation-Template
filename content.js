@@ -21,7 +21,7 @@ window.WEDDING_CONTENT = {
 
     blessingTamil: 'ஸ்ரீ கணேசாய நம: · ஸ்ரீ மீனாட்சி சுந்தரேஸ்வரர் துணை',
     blessingMalayalam: 'ഓം ശ്രീ ഗുരുവായൂരപ്പൻ തുണ',
-    blessingBody: 'With the blessings of the Almighty and our elders, we joyfully invite you and your family to grace the wedding of our children and share in the happiness of this sacred union.',
+    blessingBody: 'With the blessings of the Almighty and our elders, we joyfully invite you and your family to grace our wedding and share in the happiness of this sacred union.',
 
     groomLabel: 'THE GROOM',
     brideLabel: 'THE BRIDE',
