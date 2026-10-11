@@ -16,7 +16,7 @@ window.WEDDING_CONTENT = {
     openButton: 'OPEN INVITATION',
     heroTamil: 'திருமண அழைப்பிதழ்',
     heroMalayalam: 'വിവാഹ ക്ഷണക്കത്ത്',
-    heroSub: 'TOGETHER WITH THEIR FAMILIES',
+    heroSub: '',
     weds: 'WEDS',
 
     blessingTamil: 'ஸ்ரீ கணேசாய நம: · ஸ்ரீ மீனாட்சி சுந்தரேஸ்வரர் துணை',
